@@ -55,7 +55,36 @@ Options: `--epochs`, `--batch-size`, `--lr`, `--data-dir`, `--save model_best.pt
 python predict.py --checkpoint model_best.pt --image path/to/digit.png
 ```
 
-## Model
+## Training model structure
+
+The model is a **feedforward network**: each layer is made of units that work like a single neuron (perceptron):
+
+- **Inputs** (e.g. pixel values) are multiplied by **weights** and summed with a **bias**.
+- The result is passed through an **activation** function to produce an **output**.
+
+Single neuron (perceptron) structure:
+
+| Inputs (x₁, x₂, … xₙ) | → | Weights (w₁…wₙ) | → | Σ + bias *b* | → | Activation *g*(·) | → | Output ŷ |
+|-----------------------|---|----------------|---|--------------|---|-------------------|---|---------|
+
+**ŷ = g(w · x + b)**
+
+Our digit model stacks three such layers (flattened image → hidden → hidden → 10 classes):
+
+```
+                    Weights w₁…w₇₈₄
+  Image (28×28)  ──────────────────►  Σ + b  ──► ReLU  ──►  (×128 units)
+  flattened to 784                                 │
+                                                   ▼
+                    Weights                        Σ + b  ──► ReLU  ──►  (×128 units)
+                                                   │
+                                                   ▼
+                    Weights                        Σ + b  ──►  (×10 logits)  ──► digit 0–9
+```
+
+So: **784 inputs → 128 hidden (ReLU) → 128 hidden (ReLU) → 10 outputs**. Training updates the weights and biases to minimize classification error.
+
+## Model (summary)
 
 - **Feedforward only**: no convolutions. Image is flattened to 784 values (28×28), then:
   - Linear(784 → 128) → ReLU → Dropout
