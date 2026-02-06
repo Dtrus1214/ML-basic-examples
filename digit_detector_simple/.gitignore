@@ -1,0 +1,3 @@
+data/MNIST
+*.pt
+__pycache__/
