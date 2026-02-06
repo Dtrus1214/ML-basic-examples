@@ -20,7 +20,17 @@ class DigitMLP(nn.Module):
 
     def __init__(self, num_classes: int = 10, hidden: int = 128):
         super().__init__()
+        # flatten is used to convert tensor to 1 dimensional array
+        # in this example it will be converted to 784 array
         self.flatten = nn.Flatten()
+        # sequential network
+        # the model is composed of each layer in a sequence 
+        # such as Linear, ReLU, Dropdout, Linear
+        # the first Linear layer will convert the 784 array to hidden array
+        # the second Linear layer will convert the hidden array to hidden array
+        # the third Linear layer will convert the hidden array to num_classes array
+        # the output is the num_classes array
+        # the output is the logits for the classes 0-9
         self.net = nn.Sequential(
             nn.Linear(INPUT_SIZE, hidden),
             nn.ReLU(),
