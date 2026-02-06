@@ -1,0 +1,9 @@
+# Digit detector (0-9) with PyTorch
+torch>=2.0.0
+torchvision>=0.15.0
+
+# For loading custom images in predict.py
+Pillow>=9.0.0
+
+# Optional: for progress bars and logging
+tqdm>=4.65.0
