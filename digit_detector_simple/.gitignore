@@ -1,2 +1,7 @@
 data/MNIST
+data/test
+data/train
+data/val
 __pycache__/
+*.onnx
+*.onnx.data

@@ -5,5 +5,8 @@ torchvision>=0.15.0
 # For loading custom images in predict.py
 Pillow>=9.0.0
 
+# For convert_to_onnx.py (PyTorch ONNX export)
+onnxscript>=0.1.0
+
 # Optional: for progress bars and logging
 tqdm>=4.65.0
